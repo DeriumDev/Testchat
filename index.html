@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        #chat-box { width: 100%; height: 80vh; border: 1px solid #ddd; padding: 10px; overflow-y: scroll; }
+        #message-form { display: flex; margin-top: 10px; }
+        #message { flex: 1; padding: 10px; }
+        #send-btn { padding: 10px; background-color: #007BFF; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div id="chat-box"></div>
+    <form id="message-form">
+        <input id="message" type="text" placeholder="Enter your message" autocomplete="off" required>
+        <button id="send-btn" type="submit">Send</button>
+    </form>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        // Handle form submission
+        document.getElementById('message-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const msg = document.getElementById('message').value;
+            socket.emit('chatMessage', msg);
+            document.getElementById('message').value = '';
+        });
+
+        // Display message from server
+        socket.on('chatMessage', function(msg) {
+            const chatBox = document.getElementById('chat-box');
+            const div = document.createElement('div');
+            div.textContent = msg;
+            chatBox.appendChild(div);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        });
+    </script>
+
+</body></html>
