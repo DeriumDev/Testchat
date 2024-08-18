@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebRTC Chat App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <h1>WebRTC Chat & Call App</h1>
+        <div id="call-section">
+            <video id="localVideo" autoplay muted></video>
+            <video id="remoteVideo" autoplay></video>
+            <button id="startCallBtn">Start Call</button>
+            <button id="endCallBtn">End Call</button>
+        </div>
+        <div id="chat-section">
+            <div id="messages"></div>
+            <input type="text" id="messageInput" placeholder="Type a message">
+            <button id="sendMsgBtn">Send</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/simplewebrtc@latest/simplewebrtc.bundle.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
